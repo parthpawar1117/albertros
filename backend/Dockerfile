@@ -36,4 +36,5 @@ RUN mkdir -p /app/storage
 EXPOSE 8000
 
 # Run the V2 API with multi-agent system and Truth Market
-CMD ["uvicorn", "api_v2:app", "--host", "0.0.0.0", "--port", "8000"]
+# Shell form so $PORT (injected by Railway) expands; defaults to 8000 locally
+CMD ["sh", "-c", "uvicorn api_v2:app --host 0.0.0.0 --port ${PORT:-8000}"]
