@@ -17,6 +17,7 @@ import logging
 from dataclasses import dataclass
 from typing import List, Optional
 from langchain_groq import ChatGroq
+from llm_config import groq_model
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -51,7 +52,7 @@ class QuestionAnswerer:
     
     def __init__(self):
         self.llm = ChatGroq(
-            model="llama-3.1-8b-instant",
+            model=groq_model(),
             temperature=0.3,  # Lower temp for factual answers
             api_key=os.getenv("GROQ_API_KEY")
         )

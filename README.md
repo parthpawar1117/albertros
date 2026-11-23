@@ -207,7 +207,31 @@ APTOS_MODULE_ADDRESS=0x_your_deployed_contract_address
 
 # Optional: Enhanced Rate Limits
 GEOMI_API_KEY=your_geomi_api_key
+
+# Required by the V2 API (api_v2.py): Groq LLM
+GROQ_API_KEY=your_groq_api_key
+# Optional: Groq model for all agents (default: openai/gpt-oss-20b)
+GROQ_MODEL=openai/gpt-oss-20b
+# Recommended in production: protects admin endpoints
+ADMIN_API_KEY=a_long_random_string
 ```
+
+### Deploying the Backend to Railway
+
+The backend ships with a `Dockerfile` and `backend/railway.json` (health check on `/`, restart on failure).
+
+```bash
+npm i -g @railway/cli
+railway login
+railway init --name albertros
+railway add --service backend
+railway volume add --mount-path /app/storage   # persists generated reports
+railway variables --service backend --set GROQ_API_KEY=... --set TAVILY_API_KEY=... --set ADMIN_API_KEY=...
+railway up backend --path-as-root --service backend
+railway domain --service backend
+```
+
+The container listens on Railway's `$PORT` (8000 locally). On Git Bash for Windows, prefix the volume command with `MSYS_NO_PATHCONV=1` so `/app/storage` is not rewritten to a Windows path.
 
 ### Obtaining API Keys
 

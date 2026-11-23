@@ -12,18 +12,19 @@ RUN apt-get update && apt-get install -y \
 COPY pyproject.toml .
 
 # Install Python dependencies
+# Requirements are quoted so the shell doesn't treat ">=" as a redirect
 RUN pip install --no-cache-dir \
-    fastapi>=0.122.0 \
-    langchain>=0.3.0 \
-    langchain-core>=0.3.0 \
-    langchain-groq>=0.2.0 \
-    langgraph>=0.2.0 \
-    pydantic>=2.12.5 \
-    python-dotenv>=1.2.1 \
-    reportlab>=4.4.5 \
-    rich>=14.2.0 \
-    tavily-python>=0.5.0 \
-    uvicorn>=0.38.0
+    "fastapi>=0.122.0" \
+    "langchain>=0.3.0" \
+    "langchain-core>=0.3.0" \
+    "langchain-groq>=0.2.0" \
+    "langgraph>=0.2.0" \
+    "pydantic>=2.12.5" \
+    "python-dotenv>=1.2.1" \
+    "reportlab>=4.4.5" \
+    "rich>=14.2.0" \
+    "tavily-python>=0.5.0" \
+    "uvicorn>=0.38.0"
 
 # Copy application code
 COPY . .
@@ -35,4 +36,5 @@ RUN mkdir -p /app/storage
 EXPOSE 8000
 
 # Run the V2 API with multi-agent system and Truth Market
-CMD ["uvicorn", "api_v2:app", "--host", "0.0.0.0", "--port", "8000"]
+# Shell form so $PORT (injected by Railway) expands; defaults to 8000 locally
+CMD ["sh", "-c", "uvicorn api_v2:app --host 0.0.0.0 --port ${PORT:-8000}"]

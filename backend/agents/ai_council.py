@@ -15,6 +15,7 @@ from enum import Enum
 from dotenv import load_dotenv
 
 from langchain_groq import ChatGroq
+from llm_config import groq_model
 from langchain_core.messages import HumanMessage, SystemMessage
 
 load_dotenv()
@@ -99,7 +100,7 @@ class Prosecutor:
     
     def __init__(self):
         self.llm = ChatGroq(
-            model="llama-3.1-8b-instant",
+            model=groq_model(),
             api_key=os.getenv("GROQ_API_KEY"),
             temperature=0.3,
         )
@@ -159,7 +160,7 @@ class Defender:
     
     def __init__(self):
         self.llm = ChatGroq(
-            model="llama-3.1-8b-instant",
+            model=groq_model(),
             api_key=os.getenv("GROQ_API_KEY"),
             temperature=0.3,
         )
@@ -227,7 +228,7 @@ class Juror:
     def __init__(self, persona: Dict[str, Any]):
         self.persona = persona
         self.llm = ChatGroq(
-            model="llama-3.1-8b-instant",
+            model=groq_model(),
             api_key=os.getenv("GROQ_API_KEY"),
             temperature=persona.get("temperature", 0.2),
         )
@@ -434,7 +435,7 @@ class AICouncil:
         ])
         
         llm = ChatGroq(
-            model="llama-3.1-8b-instant",
+            model=groq_model(),
             api_key=os.getenv("GROQ_API_KEY"),
             temperature=0.1,
         )

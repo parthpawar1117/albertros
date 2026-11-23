@@ -48,3 +48,5 @@ frontend/.next/
 frontend/out/
 frontend/node_modules/
 node_modules/
+# Vercel CLI link
+.vercel
