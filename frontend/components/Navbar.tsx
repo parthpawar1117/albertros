@@ -20,7 +20,7 @@ export default function Navbar({ onReset }: NavbarProps) {
             </div>
             <div className="flex items-center gap-8 font-mono text-xs uppercase tracking-widest">
                 <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
-                <a href="https://github.com/parthpawarsnap11-create/albertros" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                <a href="https://github.com/parthpawar1117/albertros" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
                     GitHub
                 </a>
                 <ModeToggle />

@@ -160,7 +160,7 @@ User submits claim
 
 ```bash
 # Clone the repository
-git clone https://github.com/parthpawarsnap11-create/albertros.git
+git clone https://github.com/parthpawar1117/albertros.git
 cd albertros/backend
 
 # Create and activate virtual environment
