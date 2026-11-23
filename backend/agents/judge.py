@@ -17,6 +17,7 @@ from typing import TypedDict
 from dotenv import load_dotenv
 
 from langchain_groq import ChatGroq
+from llm_config import groq_model
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.graph import StateGraph, END
 
@@ -25,7 +26,7 @@ from agents.claim_processor import ClaimProcessor, ClaimType
 load_dotenv()
 
 llm = ChatGroq(
-    model="llama-3.1-8b-instant",
+    model=groq_model(),
     api_key=os.getenv("GROQ_API_KEY"),
     temperature=0.1,
 )

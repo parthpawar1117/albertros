@@ -14,6 +14,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 from langchain_groq import ChatGroq
+from llm_config import groq_model
 from langchain_core.messages import HumanMessage, SystemMessage
 
 load_dotenv()
@@ -52,7 +53,7 @@ class DevilsAdvocate:
     
     def __init__(self):
         self.llm = ChatGroq(
-            model="llama-3.1-8b-instant",
+            model=groq_model(),
             api_key=os.getenv("GROQ_API_KEY"),
             temperature=0.3,  # Slightly higher for creative counter-arguments
         )
